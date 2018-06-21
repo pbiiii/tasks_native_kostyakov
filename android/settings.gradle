@@ -1,0 +1,3 @@
+rootProject.name = 'tasks_native_kostyakov'
+
+include ':app'
