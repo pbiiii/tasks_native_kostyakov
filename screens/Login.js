@@ -20,11 +20,15 @@ class Login extends React.Component {
     handleSubmit = () => {
         const { email, password } = this.state;
         this.props.login(email, password)
+
     }
-    componentDidMount() {
+    checkAuth() {
         if(this.props.token) {
             return Actions.tasks()
         }
+    }
+    componentDidMount() {
+        this.checkAuth()
     }
     componentDidUpdate(prevProps, prevState) {
         if(prevProps !== this.props) {
@@ -34,9 +38,7 @@ class Login extends React.Component {
                     password: this.props.password
                 })
             }
-            if(this.props.token) {
-                return Actions.tasks()
-            }
+            this.checkAuth()
         }
     }
     render() {

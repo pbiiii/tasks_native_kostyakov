@@ -20,7 +20,6 @@ class Home extends React.Component {
         }
     }
     checkAuth() {
-        console.log(this.props.token)
         if(!this.props.token) {
             return Actions.login()
         }

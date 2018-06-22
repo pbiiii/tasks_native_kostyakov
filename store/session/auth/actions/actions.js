@@ -27,6 +27,7 @@ export const loginAction = (email, password) => {
     return (dispatch) => {
         client.post('/users/login', {email, password})
             .then(({data}) => {
+                storage.token = data.id
                 dispatch({
                     type: types.LOGIN_SUCCESS,
                     payload: data.id
@@ -53,3 +54,8 @@ export const logoutAction = () => {
         })
     }
 }
+
+export const setTokenAction = (token) => ({
+    type: types.SET_TOKEN,
+    payload: token
+})
