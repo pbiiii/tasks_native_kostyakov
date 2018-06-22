@@ -28,7 +28,7 @@ export const RegisterForm = ({password, email, onChange, onSubmit}) => (
         <Button
             style={styles.text}
             onPress={onSubmit}
-            title="Войти"
+            title="Регистрация"
         />
     </View>
 )

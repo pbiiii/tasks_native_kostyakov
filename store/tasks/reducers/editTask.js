@@ -14,7 +14,6 @@ export const editTask = (state = initialState, action) => {
         case 'CLOSE_EDIT_TASK_MODAL':
             return {...state, modalVisible: false, taskToEdit: initialState.taskToEdit}
         case 'CHANGE_TASK_EDIT_FORM':
-            console.log(action.payload)
             const { name, value } = action.payload
             let changedTask = {...state.taskToEdit, [name] : value }
             return {...state, taskToEdit: changedTask}

@@ -1,6 +1,6 @@
 import { storage } from "../../../storage";
 
-const initialState = async () => {return await storage.token}
+const initialState = null
 
 export const token = (state = initialState, action) => {
     switch (action.type) {
@@ -8,7 +8,6 @@ export const token = (state = initialState, action) => {
             storage.token = action.payload
             return action.payload
         case 'LOGOUT':
-            storage.token = null
             return null
         default:
             return state

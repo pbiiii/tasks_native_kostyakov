@@ -20,6 +20,7 @@ class Home extends React.Component {
         }
     }
     checkAuth() {
+        console.log(this.props.token)
         if(!this.props.token) {
             return Actions.login()
         }
@@ -42,7 +43,7 @@ class Home extends React.Component {
 const mapStateToProps = (state) => {
     return {
         tasks: state.tasks,
-        modalVisible: state.editTask.present.modalVisible,
+        modalVisible: state.editTask.modalVisible,
         token: state.auth.token,
     }
 }

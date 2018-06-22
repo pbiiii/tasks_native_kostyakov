@@ -21,7 +21,7 @@ const onResponseFulfilled = async (config) => {
 const onResponseRejected = (error) => {
     const {status} = error.response
     if (status === 401) {
-        setToken(null)
+        storage.token = null
     }
     return Promise.reject(error)
 }

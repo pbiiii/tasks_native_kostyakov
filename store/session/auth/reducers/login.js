@@ -6,7 +6,7 @@ const initialState = {
 export const login = (state = initialState, action) => {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
-            return {...state, loginSuccess: true}
+            return {...state, loginSuccess: true, badCredentials: false}
         case 'BAD_CREDENTIALS':
             return {...state, badCredentials: true}
         default:

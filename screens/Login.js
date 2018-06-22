@@ -4,6 +4,7 @@ import { loginAction } from "../store/session/auth/actions/index";
 import { connect } from 'react-redux';
 import { LoginForm } from "../components/LoginForm";
 import { Actions } from 'react-native-router-flux'
+import { Container, Content } from "native-base";
 
 class Login extends React.Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class Login extends React.Component {
     }
     handleSubmit = () => {
         const { email, password } = this.state;
-        this.props.login(email, password);
+        this.props.login(email, password)
     }
     componentDidMount() {
         if(this.props.token) {
@@ -27,6 +28,12 @@ class Login extends React.Component {
     }
     componentDidUpdate(prevProps, prevState) {
         if(prevProps !== this.props) {
+            if(this.props.email && this.props.password) {
+                this.setState({
+                    email: this.props.email,
+                    password: this.props.password
+                })
+            }
             if(this.props.token) {
                 return Actions.tasks()
             }
@@ -34,12 +41,16 @@ class Login extends React.Component {
     }
     render() {
         return (
-            <LoginForm
-                email={this.state.email}
-                password={this.state.password}
-                onChange={this.handleChange}
-                onSubmit={this.handleSubmit}
-            />
+            <Container>
+                <Content>
+                    <LoginForm
+                        email={this.state.email}
+                        password={this.state.password}
+                        onChange={this.handleChange}
+                        onSubmit={this.handleSubmit}
+                    />
+                </Content>
+            </Container>
         )
     }
 }
@@ -47,6 +58,8 @@ class Login extends React.Component {
 const mapStateToProps = (state) => {
     return {
         token: state.auth.token,
+        badCredentials: state.auth.login.badCredentials,
+        loginSuccess: state.auth.login.loginSuccess
     }
 }
 

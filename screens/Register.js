@@ -4,6 +4,7 @@ import { registerAction } from "../store/session/auth/actions/index";
 import { connect } from 'react-redux';
 import { RegisterForm } from "../components/RegisterForm";
 import { Actions } from 'react-native-router-flux'
+import { Toast } from 'native-base'
 
 class Register extends React.Component {
     constructor(props) {
@@ -25,22 +26,12 @@ class Register extends React.Component {
             if(this.props.registerSuccess || this.props.userAlreadyExists) {
                 return Actions.login({
                     registerSuccess: this.props.registerSuccess,
-                    userAlreadyExists: this.props.userAlreadyExists
+                    userAlreadyExists: this.props.userAlreadyExists,
+                    email: this.state.email,
+                    password: this.state.password
                 })
             }
         }
-        // if(this.props.registerSuccess) {
-        //     Message({
-        //         message: 'Register success',
-        //         type: 'success'
-        //     })
-        // }
-        // if(this.props.userAlreadyExists) {
-        //     Message({
-        //         message: `User with email ${this.state.email} already registered`,
-        //         type: 'warning'
-        //     })
-        // }
     }
     render() {
         return (

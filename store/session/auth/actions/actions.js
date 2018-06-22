@@ -1,5 +1,6 @@
 import * as types from './actionTypes'
 import { client } from '../../../../core/api'
+import {storage} from "../../../storage";
 
 export const registerAction = (email, password) => {
     return (dispatch) => {
@@ -31,8 +32,7 @@ export const loginAction = (email, password) => {
                     payload: data.id
                 })
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(({response}) => {
                 const { status } = response
                 if (status === 401) {
                     dispatch({
@@ -46,6 +46,7 @@ export const loginAction = (email, password) => {
 
 export const logoutAction = () => {
     return (dispatch) => {
+        storage.token = null
         dispatch({
             type: types.LOGOUT,
             payload: null

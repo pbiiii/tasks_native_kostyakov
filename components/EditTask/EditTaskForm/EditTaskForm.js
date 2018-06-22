@@ -1,15 +1,25 @@
 import React from "react";
-import {Content, Form, Item, Input, Textarea, Label, Switch} from 'native-base';
+import {Content, Form, Item, Input, Label, Switch, Button, Text, ListItem, Left, Right, List} from 'native-base';
 
-export const EditTaskForm = ({body, title, done, onChange}) => (
+export const EditTaskForm = ({body, title, done, onChange, onDelete}) => (
     <Content>
+        <Content>
+            <Button
+                onPress={() => {onDelete()}}
+                danger
+            >
+                <Text>
+                    Удалить
+                </Text>
+            </Button>
+        </Content>
         <Form>
             <Item floatingLabel>
                 <Label>Заголовок</Label>
                 <Input
                     value={title}
                     name="title"
-                    onChangeText={() => {onChange({name: 'title', value: title})}}
+                    onChangeText={(value) => {onChange({name: 'title', value})}}
                 />
             </Item>
             <Item floatingLabel last>
@@ -18,14 +28,31 @@ export const EditTaskForm = ({body, title, done, onChange}) => (
                     value={body}
                     name="body"
                     multiline
-                    onChangeText={() => {onChange({name: 'body', value: body})}}
+                    onChangeText={(value) => {onChange({name: 'body', value})}}
                 />
             </Item>
-            <Label>Выполнена</Label>
-            <Switch
-                value={done}
-                onValueChange={() => {onChange({name: 'done', value: done})}}
-            />
         </Form>
+        <List>
+            <ListItem>
+                <Left>
+                    <Text
+                        style={{
+                            width: 100
+                        }}
+                    >
+                        Выполнена
+                    </Text>
+                </Left>
+                <Right>
+                    <Switch
+                        style={{
+                            width: 50
+                        }}
+                        value={done}
+                        onValueChange={(value) => {onChange({name: 'done', value})}}
+                    />
+                </Right>
+            </ListItem>
+        </List>
     </Content>
 )
