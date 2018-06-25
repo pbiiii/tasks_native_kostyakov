@@ -1,13 +1,16 @@
-const initialState = null
+const initialState = {
+    token: null,
+    userId: null,
+}
 
 export const token = (state = initialState, action) => {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
-            return action.payload
+            return {...state, token: action.payload.id, userId: action.payload.userId}
         case 'LOGOUT':
-            return null
+            return initialState
         case 'SET_TOKEN':
-            return action.payload
+            return {...state, token: action.payload}
         default:
             return state
     }

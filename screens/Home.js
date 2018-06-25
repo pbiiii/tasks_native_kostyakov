@@ -8,20 +8,19 @@ import { Container } from 'native-base';
 
 class Home extends React.Component {
     componentDidMount() {
-        this.checkAuth()
+        if(!this.props.token) {
+            return Actions.login()
+        }
         return this.props.fetchTasks()
     }
     componentDidUpdate(prevProps, prevState) {
         if(prevProps !== this.props) {
-            this.checkAuth()
+            if(!this.props.token) {
+                return Actions.login()
+            }
             if(this.props.modalVisible) {
                 return Actions.editTask()
             }
-        }
-    }
-    checkAuth() {
-        if(!this.props.token) {
-            return Actions.login()
         }
     }
     render() {
@@ -43,7 +42,7 @@ const mapStateToProps = (state) => {
     return {
         tasks: state.tasks,
         modalVisible: state.editTask.modalVisible,
-        token: state.auth.token,
+        token: state.auth.token.token,
     }
 }
 

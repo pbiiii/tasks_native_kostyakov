@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { LoginForm } from "../components/LoginForm";
 import { Actions } from 'react-native-router-flux'
 import { Container, Content } from "native-base";
+import { Keyboard } from 'react-native'
 
 class Login extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class Login extends React.Component {
     handleSubmit = () => {
         const { email, password } = this.state;
         this.props.login(email, password)
-
+        Keyboard.dismiss()
     }
     checkAuth() {
         if(this.props.token) {
@@ -59,7 +60,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.auth.token,
+        token: state.auth.token.token,
         badCredentials: state.auth.login.badCredentials,
         loginSuccess: state.auth.login.loginSuccess
     }

@@ -118,7 +118,7 @@ class EditTask extends React.Component {
 const mapStateToProps = (state) => {
     return {
         taskToEdit: state.editTask.taskToEdit,
-        token: state.auth.token,
+        token: state.auth.token.token,
     }
 }
 

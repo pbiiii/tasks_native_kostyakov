@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Button, ActivityIndicator, ScrollView, TextInput, Keyboard, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logoutAction } from "../store/session/auth/actions";
+import {fetchUserAction, logoutAction} from "../store/session/auth/actions";
 
 const styles = StyleSheet.create({
     container: {
@@ -13,18 +13,16 @@ const styles = StyleSheet.create({
 });
 
 class Menu extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            username: '',
-            email: '',
+    componentDidMount() {
+        if(this.props.userId) {
+            this.props.fetchUser(this.props.userId)
         }
     }
     render() {
         return (
             <View style={styles.container}>
-                <Text>You name: {this.state.username}</Text>
-                <Text>You email: {this.state.username}</Text>
+                <Text>You name: {this.props.user.username}</Text>
+                <Text>You email: {this.props.user.email}</Text>
                 <Button
                     title='Logout'
                     onPress={this.props.logout}
@@ -36,15 +34,15 @@ class Menu extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.auth.token,
+        token: state.auth.token.token,
+        userId: state.auth.token.userId,
+        user: state.auth.user,
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    logout: bindActionCreators(logoutAction, dispatch)
+    logout: bindActionCreators(logoutAction, dispatch),
+    fetchUser: bindActionCreators(fetchUserAction, dispatch)
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

@@ -4,3 +4,4 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const BAD_CREDENTIALS = 'BAD_CREDENTIALS';
 export const SET_TOKEN = 'SET_TOKEN'
+export const FETCH_USER = 'FETCH_USER'

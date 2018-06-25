@@ -30,7 +30,7 @@ export const loginAction = (email, password) => {
                 storage.token = data.id
                 dispatch({
                     type: types.LOGIN_SUCCESS,
-                    payload: data.id
+                    payload: data
                 })
             })
             .catch(({response}) => {
@@ -59,3 +59,18 @@ export const setTokenAction = (token) => ({
     type: types.SET_TOKEN,
     payload: token
 })
+
+export const fetchUserAction = (userId) => {
+    return (dispatch) => {
+        client.get(`/users/${userId}`)
+            .then(({data}) => {
+                dispatch({
+                    type: types.FETCH_USER,
+                    payload: data
+                })
+            })
+            .catch(({response}) => {
+
+            })
+    }
+}
